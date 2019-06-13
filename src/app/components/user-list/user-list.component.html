@@ -1,61 +1,78 @@
 <mat-card class="pstk-card">
 
-<mat-form-field class="pstk-filters">
+  <mat-form-field class="pstk-filters">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 </mat-card>
-  
-  <table 
-    mat-table 
-    [dataSource]="dataSource" 
-    matSort 
-    multiTemplateDataRows
-    class="pstk-table mat-elevation-z8"
-  >
+
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="pstk-table mat-elevation-z8">
+  <!-- Item Description Column -->
+  <ng-container matColumnDef="pstk-list-header">
+    <th mat-header-cell *matHeaderCellDef> Lista Członków PSTK </th>
+  </ng-container>
+  <!-- Item Description Column -->
+  <ng-container matColumnDef="pstk-list-empty">
+    <th mat-header-cell *matHeaderCellDef> </th>
+  </ng-container>
+
+  <!-- Cost Description Column -->
+  <ng-container matColumnDef="pstk-list-tools">
+    <th mat-header-cell *matHeaderCellDef>Tu będą narzędzia</th>
+  </ng-container>
+
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
-      <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    [aria-label]="checkboxLabel()">
+      <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
       </mat-checkbox>
     </th>
     <td mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)"
-                    [aria-label]="checkboxLabel(row)">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
       </mat-checkbox>
     </td>
   </ng-container>
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay.slice(1)">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      {{columnsTranslated[column] ?  columnsTranslated[column] : column}}</th>
     <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
   </ng-container>
-  
-   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="example-element-diagram">
-          <div class="example-element-position"> {{element.firstName}} </div>
-          <div class="example-element-symbol"> {{element.lastName}} </div>
-        </div>
-        <div class="example-element-description">
-          {{element.address.street}} {{element.address.city}}
-          <span class="example-element-description-attribution"> -- Adress </span>
-        </div>
+      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="pstk-expanded">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <img mat-card-avatar src="https://avatars0.githubusercontent.com/u/30152904?s=460&v=4" alt="Photo of a Shiba Inu">
+                    <mat-card-title>Shiba Inu</mat-card-title>
+                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                    bred for hunting.
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+                    </div>
       </div>
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="rowClick(element)">
+  <tr mat-header-row
+    *matHeaderRowDef="['pstk-list-header', 'pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-tools']; sticky: true"
+    class="example-second-header-row">
+  </tr>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element" (click)="rowClick(element)">
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-  

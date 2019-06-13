@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {SelectionModel} from '@angular/cdk/collections';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { SelectionModel } from '@angular/cdk/collections';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { ELEMENT_DATA, User } from '../../models/User'
+import { ELEMENT_DATA, User, UserFieldNamesTranslations } from '../../models/User'
 
 @Component({
   selector: 'app-user-list',
@@ -12,8 +12,8 @@ import { ELEMENT_DATA, User } from '../../models/User'
   styleUrls: ['./user-list.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -21,11 +21,12 @@ import { ELEMENT_DATA, User } from '../../models/User'
 
 export class UserListComponent implements OnInit {
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
-  columnsToDisplay: string[] = ['select', 'firstName', 'lastName'];
+  columnsToDisplay: string[] = ['select', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
   expandedElement: User | null;
   selection = new SelectionModel<User>(true, []);
+  columnsTranslated = UserFieldNamesTranslations;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
@@ -42,13 +43,13 @@ export class UserListComponent implements OnInit {
     return numSelected === numRows;
   }
 
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-      this.isAllSelected() ?
-          this.selection.clear() :
-          this.dataSource.data.forEach(row => this.selection.select(row));
-    }
-  
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: User): string {
     if (!row) {

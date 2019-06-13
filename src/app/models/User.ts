@@ -2,62 +2,663 @@ export interface User {
     id: number,
     firstName: string,
     lastName: string,
+    status: UserStatus,
+    email: string,
+    dateOfAcceptance?: Date,
+    dateOfFirstPayment?: Date,
+    dateOfLeave?: Date,
+    rank: UserRank,
+    founder?: boolean,
+    certificateIssued?: boolean,
+    phone: number,
+    imgUrl?: string,
+    pidNo: string,
+    pidIssuedBy: string,
+    pesel: number,
+    dob: Date,
+    pob: string,
     address: {
         street: string,
         city: string,
         state: string
-    }
+    },
+    occupation?: string,
+    shootingPermitions?: string[],
+}
+
+export enum UserStatus {
+    Waiting = "Oczekujący",
+    Accepted = "Przyjęty",
+    Suspended = "Zawieszony",
+    Removed = "Usunięty"
+}
+
+export enum UserRank {
+    Member = "Członek",
+    MOB = "Członek Zarządu",
+    COB = "Prezes Zarządu",
+    VCOB = "Wiceprezes Zarządu",
+    Treasurer = 'Skarbnik',
+    MORC = 'Członek Komisji Rewizyjnej',
+    CORC = 'Przewodniczący Komisji Rewizyjnej'
+}
+
+export enum UserFieldNamesTranslations {
+    id = "Nr",
+    firstName = "Imię",
+    lastName = "Nazwisko",
+    status = "Status",
+    email = "Email",
+    dateOfAcceptance = "Data przystąpienia",
+    dateOfFirstPayment = "Data wpłaty",
+    dateOfLeave = "Data rezygnacji",
+    rank = "Funkcja",
+    founder = "Członek założyciel",
+    certificateIssued = "Wydano zaświadczenie",
+    phone = "Telefon",
+    pidNo = "Numer dowodu",
+    pidIssuedBy = "Dowod wydał",
+    pesel = "PESEL",
+    dob = "Data urodzenia",
+    pob = "Miejsce urodzenia",
+    address = "Adres",
+    occupation = "Zawód",
+    shootingPermitions = "Uprawnienia",
 }
 
 export const ELEMENT_DATA: User[] = [
-    {id: 1, firstName: 'Hydrogen', lastName: 'H', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 2, firstName: 'Helium', lastName: 'He', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 3, firstName: 'Lithium',           lastName: 'Li', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 4, firstName: 'Beryllium',         lastName: 'Be', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 5, firstName: 'Boron',         lastName: 'B', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 6, firstName: 'Carbon',             lastName: 'C', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 7, firstName: 'Nitrogen',           lastName: 'N', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 8, firstName: 'Oxygen',             lastName: 'O', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 9, firstName: 'Fluorine',           lastName: 'F', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-    {id: 10, firstName: 'Neon',          lastName: 'Ne', address: {
-        street: 'Zaciszna',
-        city: 'Rzeszów',
-        state: 'Podkarpackie'
-    }},
-  ];
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 1,
+        firstName: 'Mirosław',
+        lastName: "Dubaj",
+        status: UserStatus.Accepted,
+        email: "miroslaw.dubaj@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 2,
+        firstName: 'Jan',
+        lastName: "Kowalski",
+        status: UserStatus.Accepted,
+        email: "miroslaw@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 123123123,
+        pidNo: "AK474747",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+    {
+        id: 3,
+        firstName: 'Jan',
+        lastName: "Nowak",
+        status: UserStatus.Accepted,
+        email: "jnow@gmail.com",
+
+        rank: UserRank.Member,
+        founder: true,
+        phone: 1312452342,
+        pidNo: "AR151515",
+        pidIssuedBy: "PMRz",
+        pesel: 86021799999,
+        dob: new Date("17/02/1986"),
+        pob: "Rzeszów",
+        address: {
+            street: "Zaciszna 5B/66",
+            city: 'Rzeszów',
+            state: "Podkarpackie"
+        },
+        occupation: "Web Dev",
+    },
+];

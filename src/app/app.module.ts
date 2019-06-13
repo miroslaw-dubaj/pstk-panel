@@ -7,6 +7,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +35,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
