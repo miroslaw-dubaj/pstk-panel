@@ -1,7 +1,7 @@
 <mat-card class="pstk-card">
 
   <mat-form-field class="pstk-filters">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtruj użytkowników">
   </mat-form-field>
 </mat-card>
 
@@ -45,20 +45,50 @@
         <div class="pstk-expanded">
             <mat-card class="example-card">
                 <mat-card-header>
-                    <img mat-card-avatar src="https://avatars0.githubusercontent.com/u/30152904?s=460&v=4" alt="Photo of a Shiba Inu">
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                    <img mat-card-avatar (click)="openAvatarInModal(element)" [src]="element.imgUrl" alt="Photo of {{element.firstName}} {{element.lastName}}">
+                    <mat-card-title>{{element.firstName}} {{element.lastName}}</mat-card-title>
+                  <mat-card-subtitle>{{element.rank}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                  <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
-                  </p>
+                  <mat-tab-group>
+                    <mat-tab label="Dane członkowskie">
+                      <mat-list dense>
+                        <mat-list-item> Numer Członkowski: {{element.id}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.status}}: {{element.status}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.rank}}: {{element.rank}} </mat-list-item>
+                        <mat-list-item *ngIf="element.founder"> {{columnsTranslated.founder}}</mat-list-item>
+                        <mat-list-item *ngIf="element.dateOfAcceptance"> {{columnsTranslated.dateOfAcceptance}}: {{element.dateOfAcceptance}} </mat-list-item>
+                        <mat-list-item *ngIf="element.certificateIssued"> {{columnsTranslated.certificateIssued}}: {{element.certificateIssued}} </mat-list-item>
+                        <mat-list-item *ngIf="element.occupation"> {{columnsTranslated.occupation}}: {{element.occupation}} </mat-list-item>
+                       </mat-list>
+                    </mat-tab>
+                    <mat-tab label="Dane kontaktowe"> 
+                      <mat-list dense>
+                        <mat-list-item> {{columnsTranslated.address}}: {{element.address.street}}, {{element.address.postal}}, {{element.address.city}}, {{element.address.state}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.phone}}: {{element.phone}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.email}}: {{element.email}} </mat-list-item>
+                       </mat-list>
+                    </mat-tab>
+                    <mat-tab label="Dane osobowe">
+                      <mat-list dense>
+                        <mat-list-item> {{columnsTranslated.dob}}: {{element.dob}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.pob}}: {{element.pob}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.pidNo}}: {{element.pidNo}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.pidIssuedBy}}: {{element.pidIssuedBy}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.pesel}}: {{element.pesel}} </mat-list-item>
+                       </mat-list>
+                    </mat-tab>
+                    <mat-tab label="Dane finansowe">
+                        <mat-list dense>
+                            <mat-list-item *ngIf="element.dateOfAcceptance"> {{columnsTranslated.dateOfAcceptance}}: {{element.dateOfAcceptance}} </mat-list-item>
+                            <mat-list-item *ngIf="element.dateOfFirstPayment"> {{columnsTranslated.dateOfFirstPayment}}: {{element.dateOfFirstPayment}} </mat-list-item>
+                           </mat-list>
+                    </mat-tab>
+                  </mat-tab-group>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
+                  <button mat-button>EDYTUJ</button>
+                  <button mat-button>USUŃ</button>
                 </mat-card-actions>
               </mat-card>
                     </div>
@@ -67,7 +97,7 @@
   </ng-container>
 
   <tr mat-header-row
-    *matHeaderRowDef="['pstk-list-header', 'pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-tools']; sticky: true"
+    *matHeaderRowDef="['pstk-list-header', 'pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-empty','pstk-list-tools']; sticky: true"
     class="example-second-header-row">
   </tr>
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>

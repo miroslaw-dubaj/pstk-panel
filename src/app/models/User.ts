@@ -20,6 +20,7 @@ export interface User {
     address: {
         street: string,
         city: string,
+        postal: string,
         state: string
     },
     occupation?: string,
@@ -45,6 +46,7 @@ export enum UserRank {
 
 export enum UserFieldNamesTranslations {
     id = "Nr",
+    imgUrl="Zdjęcie",
     firstName = "Imię",
     lastName = "Nazwisko",
     status = "Status",
@@ -69,6 +71,7 @@ export enum UserFieldNamesTranslations {
 export const ELEMENT_DATA: User[] = [
     {
         id: 1,
+        imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -84,6 +87,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -91,6 +95,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -106,6 +112,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -113,6 +120,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -128,6 +137,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -135,6 +145,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -150,6 +162,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -157,6 +170,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -172,6 +187,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -179,6 +195,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -194,6 +212,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -201,6 +220,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -216,6 +237,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -223,6 +245,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -238,6 +262,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -245,6 +270,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -260,6 +287,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -267,6 +295,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -282,6 +312,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -289,6 +320,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -304,6 +337,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -311,6 +345,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -326,6 +362,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -333,6 +370,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -348,6 +387,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -355,6 +395,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -370,6 +412,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -377,6 +420,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -392,6 +437,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -399,6 +445,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -414,6 +462,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -421,6 +470,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -436,6 +487,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -443,6 +495,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -458,6 +512,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -465,6 +520,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -480,6 +537,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -487,6 +545,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -502,6 +562,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -509,6 +570,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -524,6 +587,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -531,6 +595,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -546,6 +612,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -553,6 +620,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -568,6 +637,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -575,6 +645,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -590,6 +662,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -597,6 +670,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 1,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Mirosław',
         lastName: "Dubaj",
         status: UserStatus.Accepted,
@@ -612,6 +687,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -619,6 +695,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 2,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Kowalski",
         status: UserStatus.Accepted,
@@ -634,6 +712,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },
@@ -641,6 +720,8 @@ export const ELEMENT_DATA: User[] = [
     },
     {
         id: 3,
+                imgUrl: "https://avatars0.githubusercontent.com/u/30152904?s=460&v=4",
+
         firstName: 'Jan',
         lastName: "Nowak",
         status: UserStatus.Accepted,
@@ -656,6 +737,7 @@ export const ELEMENT_DATA: User[] = [
         pob: "Rzeszów",
         address: {
             street: "Zaciszna 5B/66",
+            postal: '35-007',
             city: 'Rzeszów',
             state: "Podkarpackie"
         },

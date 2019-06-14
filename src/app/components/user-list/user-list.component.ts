@@ -3,8 +3,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {MatDialog} from '@angular/material/dialog';
+
 
 import { ELEMENT_DATA, User, UserFieldNamesTranslations } from '../../models/User'
+
+import { UserAvatarModalComponent } from '../user-avatar-modal/user-avatar-modal.component'
 
 @Component({
   selector: 'app-user-list',
@@ -21,12 +25,14 @@ import { ELEMENT_DATA, User, UserFieldNamesTranslations } from '../../models/Use
 
 export class UserListComponent implements OnInit {
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
-  columnsToDisplay: string[] = ['select', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
+  columnsToDisplay: string[] = ['select', 'id', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
   expandedElement: User | null;
   selection = new SelectionModel<User>(true, []);
   columnsTranslated = UserFieldNamesTranslations;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
@@ -61,5 +67,13 @@ export class UserListComponent implements OnInit {
   rowClick(element) {
     console.log(this.selection)
     this.expandedElement = this.expandedElement === element ? null : element;
+  }
+
+  openAvatarInModal(user : User): void {
+    console.log(user);
+    this.dialog.open(UserAvatarModalComponent, {
+      width: '80%',
+      data: user
+    });
   }
 }
