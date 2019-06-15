@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
-
+import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +19,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserAvatarModalComponent } from './components/user-avatar-modal/user-avatar-modal.component';
-
 
 @NgModule({
   declarations: [
@@ -46,6 +45,7 @@ import { UserAvatarModalComponent } from './components/user-avatar-modal/user-av
     MatDialogModule,
     MatTabsModule,
     MatListModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -64,6 +64,9 @@ export enum UserFieldNamesTranslations {
     dob = "Data urodzenia",
     pob = "Miejsce urodzenia",
     address = "Adres",
+    city= 'Miasto',
+    postal= 'Kod pocztowy',
+    state= 'Województwo',
     occupation = "Zawód",
     shootingPermitions = "Uprawnienia",
 }

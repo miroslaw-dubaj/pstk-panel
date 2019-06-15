@@ -5,41 +5,75 @@
     </mat-card-header>
     <mat-card-content>
 
-        <form class="pstk-form">
+        <form class="pstk-form" (submit)="onAddUser(userForm)" #userForm="ngForm">
             <mat-form-field class="pstk-u-w80">
               <input matInput placeholder="Company (disabled)" disabled value="Google">
             </mat-form-field>
           
             <table class="pstk-u-w80" cellspacing="0"><tr>
               <td><mat-form-field class="pstk-u-w80">
-                <input matInput placeholder="First name">
+                <input 
+                  matInput 
+                  placeholder="{{fieldNamesTranslations.firstName}}"
+                  name="firstName"
+                  ngModel
+                >
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
-                <input matInput placeholder="Long Last Name That Will Be Truncated">
+                <input 
+                  matInput 
+                  placeholder="{{fieldNamesTranslations.lastName}}"
+                  name="lastName"
+                  ngModel
+                >
               </mat-form-field></td>
             </tr></table>
           
             <p>
               <mat-form-field class="pstk-u-w80">
-                <textarea matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-              </mat-form-field>
-              <mat-form-field class="pstk-u-w80">
-                <textarea matInput placeholder="Address 2"></textarea>
+                <textarea 
+                  matInput 
+                  placeholder="{{fieldNamesTranslations.address}}"
+                  name="address"
+                  ngModel
+                >
+                </textarea>
               </mat-form-field>
             </p>
           
             <table class="pstk-u-w80" cellspacing="0"><tr>
               <td><mat-form-field class="pstk-u-w80">
-                <input matInput placeholder="City">
+                <input 
+                  matInput 
+                  placeholder="{{fieldNamesTranslations.city}}"
+                  name="address"
+                  ngModel
+                >
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
-                <input matInput placeholder="State">
+                <input 
+                  matInput 
+                  placeholder="{{fieldNamesTranslations.state}}"
+                  name="address"
+                  ngModel
+                >
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
-                <input matInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                <input 
+                  matInput 
+                  #postalCode 
+                  maxlength="5"
+                  placeholder="{{fieldNamesTranslations.postal}}"
+                  name="address"
+                  ngModel
+                >
                 <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
               </mat-form-field></td>
             </tr></table>
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit">Zapisz Użytkownika</button>
           </form>
 </mat-card-content>
 

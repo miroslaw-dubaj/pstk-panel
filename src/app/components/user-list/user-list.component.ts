@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {MatDialog} from '@angular/material/dialog';
 
+import { Subscription } from 'rxjs';
 
-import { ELEMENT_DATA, User, UserFieldNamesTranslations } from '../../models/User'
+import { User, UserFieldNamesTranslations } from '../../models/User'
 
 import { UserAvatarModalComponent } from '../user-avatar-modal/user-avatar-modal.component'
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-list',
@@ -23,19 +25,31 @@ import { UserAvatarModalComponent } from '../user-avatar-modal/user-avatar-modal
   ],
 })
 
-export class UserListComponent implements OnInit {
-  dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
+export class UserListComponent implements OnInit, OnDestroy {
+  users: User[] = [];
+  dataSource = new MatTableDataSource<User>(this.users);
   columnsToDisplay: string[] = ['select', 'id', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
   expandedElement: User | null;
   selection = new SelectionModel<User>(true, []);
   columnsTranslated = UserFieldNamesTranslations;
+  private usersSub: Subscription;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public usersService: UsersService) {}
 
   ngOnInit() {
+    this.users = this.usersService.getUsers();
+    this.usersSub = this.usersService.getUsersUpdateListener().subscribe((users: User[]) => {
+      this.users = users;
+      this.dataSource.data = [...this.users];
+    });
+    this.dataSource = new MatTableDataSource<User>(this.users);
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.usersSub.unsubscribe();
   }
 
   applyFilter(filterValue: string) {
@@ -76,4 +90,5 @@ export class UserListComponent implements OnInit {
       data: user
     });
   }
+
 }
