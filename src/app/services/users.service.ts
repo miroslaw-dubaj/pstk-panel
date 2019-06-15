@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { User } from '../models/User';
@@ -9,10 +10,13 @@ import { User } from '../models/User';
 export class UsersService {
   private users: User[] = [];
   private usersUpdated = new Subject<User[]>();
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getUsers() {
-    return [...this.users];
+    this.http.get<{message: string, users: User[] }>('http://localhost:3000/api/users').subscribe((postData) => {
+      this.users = postData.users;
+      this.usersUpdated.next([...this.users]);
+    });
   }
 
   getUsersUpdateListener() {

@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, public usersService: UsersService) {}
 
   ngOnInit() {
-    this.users = this.usersService.getUsers();
+    this.usersService.getUsers();
     this.usersSub = this.usersService.getUsersUpdateListener().subscribe((users: User[]) => {
       this.users = users;
       this.dataSource.data = [...this.users];

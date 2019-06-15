@@ -43,7 +43,7 @@ export class UserCreateComponent implements OnInit {
           state: form.value.state
       }
     }
-    console.log(user);
     this.usersService.addUser(user);
+    form.resetForm();
   }
 }
