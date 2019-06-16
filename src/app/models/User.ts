@@ -1,5 +1,5 @@
 export interface User {
-    id: number,
+    userNumber?: number,
     firstName: string,
     lastName: string,
     status: UserStatus,

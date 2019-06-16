@@ -19,7 +19,6 @@ export class UserCreateComponent implements OnInit {
 
   onAddUser(form: NgForm) {
     const user: User = {
-      id: 1,
       firstName: form.value.firstName,
       lastName:  form.value.lastName,
       status: UserStatus.Accepted,

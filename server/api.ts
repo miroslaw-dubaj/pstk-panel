@@ -6,8 +6,9 @@ const logRequest: RequestHandler = (req, res, next) => {
     next();
 }
 
-import { User, UserStatus, UserRank, } from '../src/app/models/User';
+import { UserStatus, UserRank, } from '../src/app/models/User';
 
+import {User} from './models/user'
 
 export function setupRoutes(app: Express) {
 
@@ -101,7 +102,32 @@ export function setupRoutes(app: Express) {
 
     }
     ).post((req, res, next) => {
-        const post = req.body
+        const user = new User({
+            userNumber: req.body.userNumber ? req.body.userNumber : null,
+            firstName: req.body.firstName ? req.body.firstName : null,
+            lastName: req.body.lastName ? req.body.lastName : null,
+            status: req.body.status ? req.body.status : null,
+            email: req.body.email ? req.body.email : null,
+            dateOfAcceptance: req.body.dateOfAcceptance ? req.body.dateOfAcceptance : null,
+            dateOfFirstPayment: req.body.dateOfFirstPayment ? req.body.dateOfFirstPayment : null,
+            dateOfLeave: req.body.dateOfLeave ? req.body.dateOfLeave : null,
+            rank: req.body.rank ? req.body.rank : null,
+            founder: req.body.founder ? req.body.founder : null,
+            certificateIssued: req.body.certificateIssued ? req.body.certificateIssued : null,
+            phone: req.body.phone ? req.body.phone : null,
+            imgUrl: req.body.imgUrl ? req.body.imgUrl : null,
+            pidNo: req.body.pidNo ? req.body.pidNo : null,
+            pidIssuedBy: req.body.pidIssuedBy ? req.body.pidIssuedBy : null,
+            pesel: req.body.pesel ? req.body.pesel : null,
+            dob: req.body.dob ? req.body.dob : null,
+            pob: req.body.pob ? req.body.pob : null,
+            street: req.body.adress.street ? req.body.adress.street : null,
+            city: req.body.adress.city ? req.body.adress.city : null,
+            postal: req.body.adress.postal ? req.body.adress.postal : null,
+            state: req.body.adress.state ? req.body.adress.state : null,
+            occupation: req.body.occupation ? req.body.occupation : null,
+            shootingPermitions:  req.body.shootingPermitions ? req.body.shootingPermitions : null
+        })
         console.log(req.body);
         res.status(201).json({
             message: 'Post added successfully'

@@ -75,7 +75,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userNumber + 1}`;
   }
 
   rowClick(element) {
