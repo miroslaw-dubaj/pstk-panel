@@ -25,7 +25,9 @@ export class UsersService {
 
   addUser(user: User) {
     const newUser: User = user;
-    this.users.push(newUser);
-    this.usersUpdated.next([...this.users]);
+    this.http.post<{message: string}>('http://localhost:3000/api/users', newUser).subscribe(responseData => {
+      this.users.push(newUser);
+      this.usersUpdated.next([...this.users]);
+    })
   }
 }
