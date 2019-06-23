@@ -34,7 +34,7 @@
                 <textarea 
                   matInput 
                   placeholder="{{fieldNamesTranslations.address}}"
-                  name="address"
+                  name="street"
                   ngModel
                 >
                 </textarea>
@@ -46,7 +46,7 @@
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.city}}"
-                  name="address"
+                  name="city"
                   ngModel
                 >
               </mat-form-field></td>
@@ -54,7 +54,7 @@
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.state}}"
-                  name="address"
+                  name="state"
                   ngModel
                 >
               </mat-form-field></td>
@@ -64,7 +64,7 @@
                   #postalCode 
                   maxlength="5"
                   placeholder="{{fieldNamesTranslations.postal}}"
-                  name="address"
+                  name="postal"
                   ngModel
                 >
                 <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>

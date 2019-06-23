@@ -36,12 +36,14 @@ export class UserCreateComponent implements OnInit {
       dob: new Date,
       pob: "Rzeszów",
       address: {
-          street: form.value.address,
+          street: form.value.street,
           city: form.value.city,
           postal: form.value.postal,
           state: form.value.state
       }
     }
+    console.log(user);
+    
     this.usersService.addUser(user);
     form.resetForm();
   }
