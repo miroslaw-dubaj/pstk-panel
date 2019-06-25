@@ -1,4 +1,35 @@
 import * as mongoose from 'mongoose';
+import { UserStatus, UserRank} from '../../src/app/models/User';
+
+export interface IUser extends mongoose.Document {
+    _id: string,
+    userNumber?: number,
+    firstName: string,
+    lastName: string,
+    status: UserStatus,
+    email: string,
+    dateOfAcceptance?: Date,
+    dateOfFirstPayment?: Date,
+    dateOfLeave?: Date,
+    rank: UserRank,
+    founder?: boolean,
+    certificateIssued?: boolean,
+    phone: number,
+    imgUrl?: string,
+    pidNo: string,
+    pidIssuedBy: string,
+    pesel: number,
+    dob: Date,
+    pob: string,
+    address: {
+        street: string,
+        city: string,
+        postal: string,
+        state: string
+    },
+    occupation?: string,
+    shootingPermitions?: string[],
+}
 
 const userSchema = new mongoose.Schema({
     userNumber: {type: Number, required: false},
@@ -27,4 +58,4 @@ const userSchema = new mongoose.Schema({
     shootingPermitions: {type: [[String]], required: false}
 })
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model<IUser>('User', userSchema);

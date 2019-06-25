@@ -28,7 +28,7 @@ import { UsersService } from '../../services/users.service';
 export class UserListComponent implements OnInit, OnDestroy {
   users: User[] = [];
   dataSource = new MatTableDataSource<User>(this.users);
-  columnsToDisplay: string[] = ['select', 'id', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
+  columnsToDisplay: string[] = ['select', 'userNumber', 'firstName', 'lastName', 'email', 'phone', 'status', 'dateOfAcceptance',];
   expandedElement: User | null;
   selection = new SelectionModel<User>(true, []);
   columnsTranslated = UserFieldNamesTranslations;

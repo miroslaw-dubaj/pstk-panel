@@ -45,7 +45,7 @@ export enum UserRank {
 }
 
 export enum UserFieldNamesTranslations {
-    id = "Nr",
+    userNumber = "Nr",
     imgUrl="Zdjęcie",
     firstName = "Imię",
     lastName = "Nazwisko",
