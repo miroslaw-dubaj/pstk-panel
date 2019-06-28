@@ -1,1 +1,12 @@
-<mat-toolbar color="primary">Pstk Panel</mat-toolbar>
+<mat-toolbar color="primary">
+    <span>Pstk Panel</span>
+    <span class="spacer"></span>
+    <ul>
+        <li>
+            <a mat-button routerLink="/" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{ exact: true }">List Członków</a>
+        </li>
+        <li>
+            <a mat-button routerLink="/create" routerLinkActive="mat-accent">Nowy Członek</a>
+        </li>
+    </ul>
+</mat-toolbar>

@@ -50,10 +50,13 @@ const userSchema = new mongoose.Schema({
     pesel: {type: Number, required: true},
     dob: {type: Date, required: true},
     pob: {type: String, required: true},
-    street: {type: String, required: true},
-    city: {type: String, required: true},
-    postal: {type: String, required: true},
-    state: {type: String, required: true},
+    address: {
+        street: {type: String, required: true},
+        city: {type: String, required: true},
+        postal: {type: String, required: true},
+        state: {type: String, required: true},
+
+    },
     occupation: {type: String, required: true},
     shootingPermitions: {type: [[String]], required: false}
 })

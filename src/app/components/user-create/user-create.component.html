@@ -1,41 +1,50 @@
 <mat-card class="pstk-card">
-  <mat-card-header>
-      <mat-card-title>Stwórz Użytkownika</mat-card-title>
-      <mat-card-subtitle>Formularz tworzenia członka stowarzyszenia</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-header *ngIf="!isLoading">
+    <mat-card-title>Stwórz Użytkownika</mat-card-title>
+    <mat-card-subtitle>Formularz tworzenia członka stowarzyszenia</mat-card-subtitle>
+  </mat-card-header>
+    <mat-card-content *ngIf="!isLoading">
 
-        <form class="pstk-form" (submit)="onAddUser(userForm)" #userForm="ngForm">
+        <form [formGroup]="form" class="pstk-form" (submit)="onSaveUser()">
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+              <img mat-card-avatar (click)="openAvatarInModal(imagePreview)" [src]="imagePreview" [alt]="form.value.title ? form.value.title : 'image'">
+          </div>
             <mat-form-field class="pstk-u-w80">
               <input matInput placeholder="Company (disabled)" disabled value="Google">
             </mat-form-field>
-          
+            <div>
+                <button mat-stroked-button type="button" (click)="filePicker.click()">
+                  Wyślij zdjęcie
+                </button>
+                <input type="file" #filePicker (change)="onImagePicked($event)">
+              </div>
             <table class="pstk-u-w80" cellspacing="0"><tr>
-              <td><mat-form-field class="pstk-u-w80">
+              <td><mat-form-field class="pstk-u-w80" hintLabel="Max 10 characters">
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.firstName}}"
+                  formControlName="firstName"
                   name="firstName"
-                  ngModel
                 >
+                <mat-error *ngIf="form.get('firstName').invalid">{{fieldNamesTranslations.firstName}} wpisano nie poprawnie</mat-error>
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.lastName}}"
+                  formControlName="lastName"
                   name="lastName"
-                  ngModel
                 >
               </mat-form-field></td>
             </tr></table>
-          
             <p>
               <mat-form-field class="pstk-u-w80">
                 <textarea 
                   matInput 
                   placeholder="{{fieldNamesTranslations.address}}"
+                  formControlName="street"
                   name="street"
-                  ngModel
                 >
                 </textarea>
               </mat-form-field>
@@ -46,26 +55,25 @@
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.city}}"
+                  formControlName="city"
                   name="city"
-                  ngModel
                 >
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
                 <input 
                   matInput 
                   placeholder="{{fieldNamesTranslations.state}}"
+                  formControlName="state"
                   name="state"
-                  ngModel
                 >
               </mat-form-field></td>
               <td><mat-form-field class="pstk-u-w80">
                 <input 
                   matInput 
                   #postalCode 
-                  maxlength="5"
                   placeholder="{{fieldNamesTranslations.postal}}"
+                  formControlName="postal"
                   name="postal"
-                  ngModel
                 >
                 <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
               </mat-form-field></td>

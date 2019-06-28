@@ -32,6 +32,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   expandedElement: User | null;
   selection = new SelectionModel<User>(true, []);
   columnsTranslated = UserFieldNamesTranslations;
+  isLoading = false;
   private usersSub: Subscription;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -39,8 +40,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, public usersService: UsersService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.usersService.getUsers();
     this.usersSub = this.usersService.getUsersUpdateListener().subscribe((users: User[]) => {
+      this.isLoading = false;
       this.users = users;
       this.dataSource.data = [...this.users];
     });
@@ -84,11 +87,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   openAvatarInModal(user : User): void {
-    console.log(user);
     this.dialog.open(UserAvatarModalComponent, {
       width: '80%',
       data: user
     });
   }
 
+  onDelete(userId: string) {
+    this.usersService.deleteUser(userId);
+  }
 }
