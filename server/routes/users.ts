@@ -1,9 +1,29 @@
 import { Router } from 'express';
 import { User } from '../models/user'
-import { User as IUser, UserStatus, UserRank } from '../../src/app/models/User';
+import * as  multer from 'multer';
 
+enum MIME_TYPE_MAP {
+    'image/png'= 'png',
+    'image/jpeg'= 'jpg',
+    'image/jpg'= 'jpg'
+}
 
 export const router = Router();
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype]
+        let error = new Error('Invalid mime type');
+        if (isValid) {
+            error = null;
+        }
+        cb(error, 'server/images')
+    },
+    filename: (req, file, cb) => {
+        const name = file.originalname.toLowerCase().split(' ').join('-');
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, `${name}-${Date.now()}.${ext}`)
+    }
+});
 
 router.route("")
         .get((req, res, next) => {
@@ -15,7 +35,8 @@ router.route("")
             })
         }
         )
-        .post((req, res, next) => {
+        .post(multer({ storage: storage }).single('image'), (req, res, next) => {
+            const url = `${req.protocol}://${req.get('host')}`
             User.find().limit(1).sort({ $natural: -1 }).then(lastUser => {
                 const user = new User({
                     userNumber: lastUser[0] ? lastUser[0].userNumber + 1 : 1,
@@ -30,7 +51,7 @@ router.route("")
                     founder: req.body.founder ? req.body.founder : false,
                     certificateIssued: req.body.certificateIssued ? req.body.certificateIssued : false,
                     phone: req.body.phone ? req.body.phone : 0,
-                    imgUrl: req.body.imgUrl ? req.body.imgUrl : 'null',
+                    imgUrl: req.body.imgUrl ? req.body.imgUrl : `${url}/images/${req.file.filename}`,
                     pidNo: req.body.pidNo ? req.body.pidNo : 'null',
                     pidIssuedBy: req.body.pidIssuedBy ? req.body.pidIssuedBy : 'null',
                     pesel: req.body.pesel ? req.body.pesel : 0,
@@ -46,10 +67,9 @@ router.route("")
                     shootingPermitions: req.body.shootingPermitions ? req.body.shootingPermitions : ['']
                 })
                 user.save().then(createdUser => {
-
                     res.status(201).json({
                         message: 'Post added successfully',
-                        createdUserId: createdUser._id
+                        savedUser: createdUser
                     })
                 });
             })

@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as path from 'path';
 
 // const port = (Number(process.env.PORT) || 3000)
 // app.set('port', port);
@@ -61,6 +62,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', "GET, POST, PUT, PATCH, DELETE, OPTIONS")
     next();
 })
+app.use('/images', express.static(path.join('server/images')));
+
 setupRoutes(app);
 
 const server = http.createServer(app);

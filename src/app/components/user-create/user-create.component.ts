@@ -74,6 +74,7 @@ export class UserCreateComponent implements OnInit {
             'city': this.user.address.city,
             'state': this.user.address.state,
             'postal': this.user.address.postal,
+            'image': this.user.imgUrl,
           })
         });
       } else {
@@ -93,7 +94,6 @@ export class UserCreateComponent implements OnInit {
       _id: null,
       firstName: this.form.value.firstName,
       lastName:  this.form.value.lastName,
-      imgUrl: this.form.value.image,
       status: UserStatus.Accepted,
       email: "test@test.com",
       dateOfAcceptance: new Date,
@@ -117,9 +117,9 @@ export class UserCreateComponent implements OnInit {
     }
     if (this.mode === FormMode.Create) {
       
-      this.usersService.addUser(user);
+      this.usersService.addUser(user, this.form.value.image);
     } else {
-      this.usersService.updateUser(this.userId, user)
+      this.usersService.updateUser(this.userId, user, this.form.value.image)
     }
 
     this.form.reset();

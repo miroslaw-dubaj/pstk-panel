@@ -28,20 +28,44 @@ export class UsersService {
     return this.http.get<User>(`http://localhost:3000/api/users/${id}`);
   }
 
-  addUser(user: User) {
-    const newUser: User = user;
-    this.http.post<{message: string, createdUserId: string}>('http://localhost:3000/api/users', newUser).subscribe(responseData => {
-      const newUserId = responseData.createdUserId;
+  addUser(user: User, image?: File) {
+    const { firstName, lastName, address } = user;
+    const userData = new FormData();
+    userData.append('firstName', firstName)
+    userData.append('lastName', lastName)
+    userData.append('address[city]', address.city)
+    userData.append('address[postal]', address.postal)
+    userData.append('address[state]', address.state)
+    userData.append('address[street]', address.street)
+    userData.append('image', image, lastName)
+    this.http.post<{message: string, savedUser: User}>('http://localhost:3000/api/users', userData).subscribe(responseData => {
+      const newUser: User = user;
+      const newUserId = responseData.savedUser._id;
       newUser._id = newUserId;
+      newUser.imgUrl = responseData.savedUser.imgUrl;
       this.users.push(newUser);
       this.usersUpdated.next([...this.users]);
       this.router.navigate(['/']);
     })
   }
 
-  updateUser(id: string, user: User) {
-    const newUser: User = user;
-    this.http.put(`http://localhost:3000/api/users/${id}`, user)
+  updateUser(id: string, user: User, image: File | string) {
+    if (typeof(image) === 'object') {
+      const { firstName, lastName, address } = user;
+
+      const userData = new FormData();
+      userData.append('firstName', firstName)
+      userData.append('lastName', lastName)
+      userData.append('address[city]', address.city)
+      userData.append('address[postal]', address.postal)
+      userData.append('address[state]', address.state)
+      userData.append('address[street]', address.street)
+      userData.append('image', image, lastName)
+    } else {
+      const userData: User = user;
+      userData.imgUrl = image;
+    }
+    this.http.put(`http://localhost:3000/api/users/${id}`, userData)
     .subscribe(response => {
       const updatedUsers = [...this.users];
       const oldUserIndex = updatedUsers.findIndex(u => u._id === user._id);

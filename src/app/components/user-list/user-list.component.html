@@ -64,7 +64,7 @@
                     </mat-tab>
                     <mat-tab label="Dane kontaktowe"> 
                       <mat-list dense>
-                        <mat-list-item> {{columnsTranslated.address}}: <span [innerHTML]="element.street"></span>, {{element.postal}}, {{element.city}}, {{element.state}} </mat-list-item>
+                        <mat-list-item> {{columnsTranslated.address}}: <span [innerHTML]="element.address.street"></span>, {{element.address.postal}}, {{element.address.city}}, {{element.address.state}} </mat-list-item>
                         <mat-list-item> {{columnsTranslated.phone}}: {{element.phone}} </mat-list-item>
                         <mat-list-item> {{columnsTranslated.email}}: {{element.email}} </mat-list-item>
                        </mat-list>

@@ -82,7 +82,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   rowClick(element) {
-    console.log(this.selection)
     this.expandedElement = this.expandedElement === element ? null : element;
   }
 
