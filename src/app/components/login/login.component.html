@@ -1,0 +1,43 @@
+<mat-card class="pstk-card">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-header *ngIf="!isLoading">
+    <mat-card-title>Zaloguj się</mat-card-title>
+    <mat-card-subtitle>Podaj email i hasło</mat-card-subtitle>
+  </mat-card-header>
+    <mat-card-content *ngIf="!isLoading">
+        <form class="pstk-form" (submit)=onSubmit(loginForm) #loginForm="ngForm">
+            <table class="pstk-u-w80" cellspacing="0"><tr>
+              <td><mat-form-field class="pstk-u-w80" hintLabel="Max 10 characters">
+                <input 
+                  matInput
+                  ngModel
+                  #emailInput="ngModel" 
+                  required
+                  email
+                  placeholder="{{fieldNamesTranslations.email}}"
+                  type="email"
+                  name="email"
+                >
+                <mat-error *ngIf="emailInput.invalid">{{fieldNamesTranslations.email}} wpisano nie poprawnie</mat-error>
+              </mat-form-field></td>
+              <td><mat-form-field class="pstk-u-w80">
+                <input 
+                  matInput 
+                  ngModel
+                  required
+                  #passwordInput="ngModel" 
+                  type="password"
+                  name="password"
+                  placeholder="Hasło"
+                >
+                <mat-error *ngIf="passwordInput.invalid">Hasło wpisano nie poprawnie</mat-error>
+              </mat-form-field></td>
+            </tr></table>
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit">Zaloguj</button>
+          </form>
+</mat-card-content>
+
+</mat-card>

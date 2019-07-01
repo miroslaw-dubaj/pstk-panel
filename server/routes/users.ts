@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { User } from '../models/user'
 import * as  multer from 'multer';
+import * as bcrypt from 'bcrypt';
 
 enum MIME_TYPE_MAP {
     'image/png'= 'png',
@@ -86,42 +87,50 @@ router.route("")
                 }
             })
         })
-        .put((req, res, next) => {
-            let userNumber = 1;
-            User.findById(req.params.user_id).then(lastUser => {
-                userNumber = lastUser.userNumber ? lastUser.userNumber : 1;
-            })
-            const user = new User({
-                _id: req.params.user_id,
-                userNumber: userNumber,
-                firstName: req.body.firstName ? req.body.firstName : 'null',
-                lastName: req.body.lastName ? req.body.lastName : 'null',
-                status: req.body.status ? req.body.status : 'null',
-                email: req.body.email ? req.body.email : 'null',
-                dateOfAcceptance: req.body.dateOfAcceptance ? req.body.dateOfAcceptance : new Date,
-                dateOfFirstPayment: req.body.dateOfFirstPayment ? req.body.dateOfFirstPayment : new Date,
-                dateOfLeave: req.body.dateOfLeave ? req.body.dateOfLeave : new Date,
-                rank: req.body.rank ? req.body.rank : 'null',
-                founder: req.body.founder ? req.body.founder : false,
-                certificateIssued: req.body.certificateIssued ? req.body.certificateIssued : false,
-                phone: req.body.phone ? req.body.phone : 0,
-                imgUrl: req.body.imgUrl ? req.body.imgUrl : 'null',
-                pidNo: req.body.pidNo ? req.body.pidNo : 'null',
-                pidIssuedBy: req.body.pidIssuedBy ? req.body.pidIssuedBy : 'null',
-                pesel: req.body.pesel ? req.body.pesel : 0,
-                dob: req.body.dob ? req.body.dob : new Date,
-                pob: req.body.pob ? req.body.pob : 'null',
-                address: {
-                    street: req.body.address.street ? req.body.address.street : 'null',
-                    city: req.body.address.city ? req.body.address.city : 'null',
-                    postal: req.body.address.postal ? req.body.address.postal : 'null',
-                    state: req.body.address.state ? req.body.address.state : 'null',
-                },
-                occupation: req.body.occupation ? req.body.occupation : 'null',
-                shootingPermitions: req.body.shootingPermitions ? req.body.shootingPermitions : ['']
-            })
-            User.updateOne({_id: req.params.user_id}, user).then(result => {
-                res.status(200).json({message: 'Update successful!'})
+        .put(multer({ storage: storage }).single('image'), (req, res, next) => {
+            bcrypt.hash(req.body.password, 10).then(hash => {
+                let userNumber = 1;
+                let imgUrl: string = req.body.imgUrl;
+                User.findById(req.params.user_id).then(lastUser => {
+                    userNumber = lastUser.userNumber ? lastUser.userNumber : 1;
+                })
+                if (req.file) {
+                    const url = `${req.protocol}://${req.get('host')}`;
+                    imgUrl = `${url}/images/${req.file.filename}`
+                }
+                const user = new User({
+                    _id: req.params.user_id,
+                    userNumber: userNumber,
+                    firstName: req.body.firstName ? req.body.firstName : 'null',
+                    lastName: req.body.lastName ? req.body.lastName : 'null',
+                    status: req.body.status ? req.body.status : 'null',
+                    email: req.body.email ? req.body.email : 'null',
+                    password: hash,
+                    dateOfAcceptance: req.body.dateOfAcceptance ? req.body.dateOfAcceptance : new Date,
+                    dateOfFirstPayment: req.body.dateOfFirstPayment ? req.body.dateOfFirstPayment : new Date,
+                    dateOfLeave: req.body.dateOfLeave ? req.body.dateOfLeave : new Date,
+                    rank: req.body.rank ? req.body.rank : 'null',
+                    founder: req.body.founder ? req.body.founder : false,
+                    certificateIssued: req.body.certificateIssued ? req.body.certificateIssued : false,
+                    phone: req.body.phone ? req.body.phone : 0,
+                    imgUrl: imgUrl,
+                    pidNo: req.body.pidNo ? req.body.pidNo : 'null',
+                    pidIssuedBy: req.body.pidIssuedBy ? req.body.pidIssuedBy : 'null',
+                    pesel: req.body.pesel ? req.body.pesel : 0,
+                    dob: req.body.dob ? req.body.dob : new Date,
+                    pob: req.body.pob ? req.body.pob : 'null',
+                    address: {
+                        street: req.body.address ? req.body.address.street : req.body.street,
+                        city: req.body.address ? req.body.address.city : req.body.city,
+                        postal: req.body.address ? req.body.address.postal : req.body.postal,
+                        state: req.body.address ? req.body.address.state : req.body.state,
+                    },
+                    occupation: req.body.occupation ? req.body.occupation : 'null',
+                    shootingPermitions: req.body.shootingPermitions ? req.body.shootingPermitions : ['']
+                })
+                User.updateOne({_id: req.params.user_id}, user).then(result => {
+                    res.status(200).json({message: 'Update successful!', savedUser: user })
+                })
             })
         })
         .delete((req, res, next) => {

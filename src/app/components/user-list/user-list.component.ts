@@ -46,9 +46,14 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       this.users = users;
       this.dataSource.data = [...this.users];
+      
+      console.log(this.dataSource.sort);
+      console.log(this.sort);
     });
-    this.dataSource = new MatTableDataSource<User>(this.users);
     this.dataSource.sort = this.sort;
+    console.log(this.dataSource.sort);
+    console.log(this.sort);
+
   }
 
   ngOnDestroy() {
@@ -57,6 +62,8 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.sort);
+
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

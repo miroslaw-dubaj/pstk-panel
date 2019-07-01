@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { UserCreateComponent } from './components/user-create/user-create.compon
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserAvatarModalComponent } from './components/user-avatar-modal/user-avatar-modal.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HeaderComponent,
     UserCreateComponent,
     UserListComponent,
-    UserAvatarModalComponent
+    UserAvatarModalComponent,
+    LoginComponent
   ],
   entryComponents: [
     UserAvatarModalComponent
@@ -50,6 +53,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTabsModule,
     MatListModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
   ],

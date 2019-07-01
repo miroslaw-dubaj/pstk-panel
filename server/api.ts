@@ -3,6 +3,7 @@ import * as bodyparser from "body-parser";
 import * as mongoose from 'mongoose';
 
 import { router as usersRoutes } from './routes/users'
+import { router as authRoutes } from './routes/auth'
 
 const logRequest: RequestHandler = (req, res, next) => {
     console.log(req.method + " Request: " + req.url);
@@ -22,4 +23,5 @@ export function setupRoutes(app: Express) {
     app.use(bodyparser.json())
     app.use(bodyparser.urlencoded({ extended: false }));
     app.use('/api/users', usersRoutes);
+    app.use('/api/auth', authRoutes);
 }

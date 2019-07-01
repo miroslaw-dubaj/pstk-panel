@@ -50,10 +50,10 @@ export class UsersService {
   }
 
   updateUser(id: string, user: User, image: File | string) {
+    let userData: User | FormData;
     if (typeof(image) === 'object') {
       const { firstName, lastName, address } = user;
-
-      const userData = new FormData();
+      userData = new FormData();
       userData.append('firstName', firstName)
       userData.append('lastName', lastName)
       userData.append('address[city]', address.city)
@@ -62,14 +62,15 @@ export class UsersService {
       userData.append('address[street]', address.street)
       userData.append('image', image, lastName)
     } else {
-      const userData: User = user;
+      userData = user;
       userData.imgUrl = image;
     }
     this.http.put(`http://localhost:3000/api/users/${id}`, userData)
     .subscribe(response => {
       const updatedUsers = [...this.users];
-      const oldUserIndex = updatedUsers.findIndex(u => u._id === user._id);
-      updatedUsers[oldUserIndex] = user;
+      const oldUserIndex = updatedUsers.findIndex(u => u._id === id);
+      const updatedUser: User = user;
+      updatedUsers[oldUserIndex] = updatedUser;
       this.users = updatedUsers;
       this.usersUpdated.next([...this.users]);
       this.router.navigate(['/']);

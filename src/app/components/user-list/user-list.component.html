@@ -4,8 +4,9 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtruj użytkowników">
   </mat-form-field>
 </mat-card>
+<div [ngClass]='isLoading !== false ? "visible": "hidden"'>
 
-<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="pstk-table mat-elevation-z8" *ngIf="!isLoading">
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="pstk-table mat-elevation-z8" >
   <!-- Item Description Column -->
   <ng-container matColumnDef="pstk-list-header">
     <th mat-header-cell *matHeaderCellDef> Lista Członków PSTK </th>
@@ -106,3 +107,4 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+</div>

@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import { UserStatus, UserRank} from '../../src/app/models/User';
+import * as uniqueValidator from 'mongoose-unique-validator';
 
 export interface IUser extends mongoose.Document {
     _id: string,
@@ -36,7 +37,8 @@ const userSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     status: {type: String, required: true},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
     dateOfAcceptance: {type: Date, required: true},
     dateOfFirstPayment: {type: Date, required: true},
     dateOfLeave: {type: Date, required: true},
@@ -60,5 +62,7 @@ const userSchema = new mongoose.Schema({
     occupation: {type: String, required: true},
     shootingPermitions: {type: [[String]], required: false}
 })
+
+userSchema.plugin(uniqueValidator);
 
 export const User = mongoose.model<IUser>('User', userSchema);
